@@ -1,15 +1,23 @@
 package mx.edu.unpa.JSQ_SQO;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
 public class SecondActivity2 extends AppCompatActivity {
+    private ImageView iv;
+    private ImageView iv_2;
+    private ConstraintLayout cl;
+    private Bundle extras;
+    private TextView tv;
+
 //PROBANDO LAS IMAGENES PARA VER QUE NO TENGA FONDOS
     //COMENTARIOS
     private static final Random rgenerador = new Random();
@@ -52,28 +60,48 @@ public class SecondActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second2);
+        // Obtenemos el ConstraintLayout
+        cl = (ConstraintLayout) findViewById(R.id.cl);
+        tv = (TextView) findViewById(R.id.txtOp);
+        //cl.setBackgroundResource(R.drawable.fondo);
+        extras = getIntent().getExtras();
+        setImageCL(extras.getInt("idButton"));
+        iv = (ImageView) findViewById(R.id.imgRandom);
+        iv_2 = (ImageView) findViewById(R.id.imgRandom2);
+    }
 
-        Integer m = imagenesID[rgenerador.nextInt(imagenesID.length)];
-        Integer m1 = imagenesID_2[rgenerador_2.nextInt(imagenesID_2.length)];
+    public void onClick(View v){
+        int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
+        iv.setImageResource(resource);
 
-        final ImageView iv = (ImageView) findViewById(R.id.imgRandom);
-        final ImageView iv_2 = (ImageView) findViewById(R.id.imgRandom2);
-
-        View nextButton = findViewById(R.id.btnImagen);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int resource = imagenesID[rgenerador.nextInt(imagenesID.length)];
-                iv.setImageResource(resource);
-
-                int resource_2 = imagenesID_2[rgenerador_2.nextInt(imagenesID_2.length)];
-                iv_2.setImageResource(resource_2);
-            }
-        });
+        int resource_2 = imagenesID_2[rgenerador_2.nextInt(imagenesID_2.length)];
+        iv_2.setImageResource(resource_2);
     }
 
     public void clickVista3(View view) {
         Intent _intent = new Intent(SecondActivity2.this, ThirdActivity.class);
         startActivity(_intent);
+    }
+
+    // Asignamos la imagen correspondiente al ConstraintLayout
+    public void setImageCL(int id){
+        switch(id){
+            case R.id.btnSuma:
+                cl.setBackgroundResource(R.drawable.fondo2);
+                tv.setText("+");
+                break;
+            case R.id.btnResta:
+                cl.setBackgroundResource(R.drawable.fondo3);
+                tv.setText("-");
+                break;
+            case R.id.btnMult:
+                cl.setBackgroundResource(R.drawable.fondo4);
+                tv.setText("×");
+                break;
+            case R.id.btnDiv:
+                cl.setBackgroundResource(R.drawable.fondo5);
+                tv.setText("÷");
+                break;
+        }
     }
 }

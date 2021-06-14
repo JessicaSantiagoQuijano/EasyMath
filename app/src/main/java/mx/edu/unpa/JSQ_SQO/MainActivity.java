@@ -12,7 +12,6 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View v){
-        tv = (TextView) findViewById(v.getId());
         CustomAnimation customAnimation = CustomAnimation.getThis();
-        customAnimation.startAnimation(getApplicationContext(), CustomAnimation.AnimationType.ZoomIn, tv);
+        customAnimation.startAnimation(getApplicationContext(), CustomAnimation.AnimationType.ZoomIn, v);
         customAnimation.endAnimation(MainActivity.this, SecondActivity2.class, v);
     }
 
