@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class SecondActivity2 extends AppCompatActivity {
 //PROBANDO LAS IMAGENES PARA VER QUE NO TENGA FONDOS
+    //COMENTARIOS
     private static final Random rgenerador = new Random();
    /* private static final Integer[] imagenesID = {R.drawable.manzana1, R.drawable.manzana4,
                             R.drawable.manzana6, R.drawable.manzana7,
