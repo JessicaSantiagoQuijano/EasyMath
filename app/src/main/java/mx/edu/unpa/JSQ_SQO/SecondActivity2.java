@@ -5,9 +5,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -19,6 +22,7 @@ public class SecondActivity2 extends AppCompatActivity {
     private TextView tvOp;
     private TextView tvNivel;
     private int nivel;
+    private Chronometer cronometro;
 
     //PROBANDO LAS IMAGENES PARA VER QUE NO TENGA FONDOS
     //COMENTARIOS
@@ -50,11 +54,14 @@ public class SecondActivity2 extends AppCompatActivity {
 
         // Obtenemos el ConstraintLayout
         cl = (ConstraintLayout) findViewById(R.id.cl);
-        // Obtenemos el TextView para mostrar el símbolo de la operación.
-        tvOp = (TextView) findViewById(R.id.txtOp);
         // Obtenemos el TextView para mostrar el nivel.
         tvNivel = (TextView) findViewById(R.id.txtNivel);
         nivel=1;
+        // Obtenemos el cronómetro para mostrar el tiempo transcurrido.
+        cronometro = (Chronometer) findViewById(R.id.crono);
+        startCronometro();// Iniciamos el cronometro.
+        // Obtenemos el TextView para mostrar el símbolo de la operación.
+        tvOp = (TextView) findViewById(R.id.txtOp);
         // Obtenemos los ImageView para mostrar las imágenes de los objetos.
         iv = (ImageView) findViewById(R.id.imgRandom);
         iv_2 = (ImageView) findViewById(R.id.imgRandom2);
@@ -71,6 +78,7 @@ public class SecondActivity2 extends AppCompatActivity {
             tvNivel.setText("Nivel " + nivel);
             setImageOp(extras.getInt("idButton"));
         }else{
+            stopCronometro();
             Intent _intent = new Intent(SecondActivity2.this, ThirdActivity.class);
             startActivity(_intent);
         }
@@ -122,18 +130,21 @@ public class SecondActivity2 extends AppCompatActivity {
             case R.id.btnDiv:
                 resource = imagenesID_4[rgenerador.nextInt(imagenesID_4.length)];
                 resource_2 = imagenesID_5[rgenerador_2.nextInt(imagenesID_5.length)];
-//                boolean aux=rgenerador.nextBoolean();
-//                if(aux) {
-//                    resource = imagenesID_4[rgenerador.nextInt(imagenesID_4.length)];
-//                    resource_2 = imagenesID_4[rgenerador_2.nextInt(imagenesID_4.length)];
-//                }else{
-//                    resource = imagenesID_5[rgenerador.nextInt(imagenesID_5.length)];
-//                    resource_2 = imagenesID_5[rgenerador_2.nextInt(imagenesID_5.length)];
-//                }
                 break;
         }
         iv.setImageResource(resource);
         iv_2.setImageResource(resource_2);
+    }
+
+    public void startCronometro(){
+        cronometro.setBase(SystemClock.elapsedRealtime());
+        cronometro.start();
+    }
+
+    public void stopCronometro(){
+        cronometro.stop();
+        long tiempoT = SystemClock.elapsedRealtime() - cronometro.getBase();
+        Toast.makeText(this, "Tiempo: "+tiempoT, Toast.LENGTH_LONG).show();
     }
 
 }
