@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class SecondActivity2 extends AppCompatActivity {
@@ -23,29 +24,30 @@ public class SecondActivity2 extends AppCompatActivity {
     private TextView tvNivel;
     private int nivel;
     private Chronometer cronometro;
+    private LinkedList<Aritmetica> resultados;
 
     //PROBANDO LAS IMAGENES PARA VER QUE NO TENGA FONDOS
     //COMENTARIOS
     private static final Random rgenerador = new Random();
     private static final Random rgenerador_2 = new Random();
-    private static final Integer[] imagenesID = {R.drawable.manzana1, R.drawable.manzana4,
-               R.drawable.manzana6, R.drawable.manzana7,
-               R.drawable.manzana8, R.drawable.manzana9};
+    private static final Integer[] imagenesID = {R.drawable.manzana_1, R.drawable.manzana_4,
+               R.drawable.manzana_6, R.drawable.manzana_7,
+               R.drawable.manzana_8, R.drawable.manzana_9};
 
-    private static final Integer[] imagenesID_2 = {R.drawable.balde1, R.drawable.balde10,
-            R.drawable.balde2, R.drawable.balde3, R.drawable.balde4,R.drawable.balde5,
-            R.drawable.balde6, R.drawable.balde8};
+    private static final Integer[] imagenesID_2 = {R.drawable.balde_1, R.drawable.balde_10,
+            R.drawable.balde_2, R.drawable.balde_3, R.drawable.balde_4,R.drawable.balde_5,
+            R.drawable.balde_6, R.drawable.balde_8};
 
-    private static final Integer[] imagenesID_3 = {R.drawable.huevo1, R.drawable.huevo2,
-            R.drawable.huevo3, R.drawable.huevo4, R.drawable.huevo5,
-            R.drawable.huevo7, R.drawable.huevo8, R.drawable.huevo9};
+    private static final Integer[] imagenesID_3 = {R.drawable.huevo_1, R.drawable.huevo_2,
+            R.drawable.huevo_3, R.drawable.huevo_4, R.drawable.huevo_5,
+            R.drawable.huevo_7, R.drawable.huevo_8, R.drawable.huevo_9};
 
-    private static final Integer[] imagenesID_4 = {R.drawable.heno10, R.drawable.heno2,
-                R.drawable.heno3, R.drawable.heno4, R.drawable.heno6,
-                R.drawable.heno8, R.drawable.heno9};
+    private static final Integer[] imagenesID_4 = {R.drawable.heno_10, R.drawable.heno_2,
+                R.drawable.heno_3, R.drawable.heno_4, R.drawable.heno_6,
+                R.drawable.heno_8, R.drawable.heno_9};
 
-    private static final Integer[] imagenesID_5 = {R.drawable.caballo1, R.drawable.caballo2,
-                R.drawable.caballo3, R.drawable.caballo4, R.drawable.caballo5};
+    private static final Integer[] imagenesID_5 = {R.drawable.caballo_1, R.drawable.caballo_2,
+                R.drawable.caballo_3, R.drawable.caballo_4, R.drawable.caballo_5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,23 +72,20 @@ public class SecondActivity2 extends AppCompatActivity {
         extras = getIntent().getExtras();
         setImageCL(extras.getInt("idButton"));
         setImageOp(extras.getInt("idButton"));
+        resultados=new LinkedList();
     }
 
-    public void onClick(View v){
+    public void onClickSig(View v){
         if(nivel < 10) {
             nivel++;
             tvNivel.setText("Nivel " + nivel);
             setImageOp(extras.getInt("idButton"));
+
         }else{
             stopCronometro();
             Intent _intent = new Intent(SecondActivity2.this, ThirdActivity.class);
             startActivity(_intent);
         }
-    }
-
-    public void clickVista3(View view) {
-        Intent _intent = new Intent(SecondActivity2.this, ThirdActivity.class);
-        startActivity(_intent);
     }
 
     // Asignamos la imagen correspondiente al ConstraintLayout
@@ -109,6 +108,7 @@ public class SecondActivity2 extends AppCompatActivity {
                 tvOp.setText("÷");
                 break;
         }
+
     }
 
     public void setImageOp(int id){
@@ -134,6 +134,7 @@ public class SecondActivity2 extends AppCompatActivity {
         }
         iv.setImageResource(resource);
         iv_2.setImageResource(resource_2);
+        //unidadTexto(getResources().getResourceEntryName(resource));
     }
 
     public void startCronometro(){
@@ -145,6 +146,35 @@ public class SecondActivity2 extends AppCompatActivity {
         cronometro.stop();
         long tiempoT = SystemClock.elapsedRealtime() - cronometro.getBase();
         Toast.makeText(this, "Tiempo: "+tiempoT, Toast.LENGTH_LONG).show();
+    }
+
+    public void onClickOpc(View v) {
+        switch(v.getId()) {
+            case R.id.btn_1:
+
+                break;
+            case R.id.btn_2:
+
+                break;
+            case R.id.btn_3:
+
+                break;
+        }
+    }
+
+    public void operaciones(){
+        String opc=tvOp.getText().toString();
+        switch (opc){
+            case "+":
+
+                break;
+            case "-":
+                break;
+            case "×":
+                break;
+            case "÷":
+                break;
+        }
     }
 
 }
